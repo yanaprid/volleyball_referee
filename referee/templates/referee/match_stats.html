@@ -1,0 +1,36 @@
+﻿{% extends "referee/base.html" %}
+
+{% block content %}
+<h1>Статистика матча: {{ match.team_a }} vs {{ match.team_b }}</h1>
+<h2>Счёт: {{ match.team_a_score }} - {{ match.team_b_score }}</h2>
+
+{% if mvp %}
+<h3>MVP матча: {{ mvp.name }} ({{ mvp.team }})</h3>
+{% endif %}
+
+<h4 class="mt-4">Игроки:</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Игрок</th>
+            <th>Команда</th>
+            <th>Позиция</th>
+            <th>Всего действий</th>
+            <th>Успешных</th>
+            <th>Очки</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for player, stats in player_stats.items %}
+        <tr>
+            <td>{{ player.name }}</td>
+            <td>{{ player.team }}</td>
+            <td>{{ player.get_position_display }}</td>
+            <td>{{ stats.total_actions }}</td>
+            <td>{{ stats.successful_actions }}</td>
+            <td>{{ stats.points }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,89 @@
+﻿{% load custom_tags %}
+
+{% load stats_tag %}
+
+<div class="volleyball-court">
+    <div class="court-front">
+        <h5>Передняя линия</h5>
+        <div class="d-flex justify-content-around mb-3">
+            {% for zone in '432'|make_list %}
+            <div class="zone-box zone-{{ zone }}">
+                <div class="zone-label"> {{ zone }}</div>
+                {% with player=team.players|get_player_by_zone:zone %}
+                {% if player %}
+                <div class="player-info {% if player.is_captain %}captain-highlight{% endif %}">
+                    <span class="badge {% if player.is_captain %}bg-warning{% else %}bg-secondary{% endif %}">
+                        {{ player.number }}
+                    </span>
+                    {{ player.name }}
+                    <small class="d-block">{{ player.get_position_display }}</small>
+                    {% if player.is_captain %}<small class="d-block text-warning fw-bold">(K)</small>{% endif %}
+                </div>
+                {% endif %}
+                {% endwith %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="court-back">
+        <h5>Задняя линия</h5>
+        <div class="d-flex justify-content-around">
+            {% for zone in '561'|make_list %}
+            <div class="zone-box zone-{{ zone }}">
+                <div class="zone-label"> {{ zone }}</div>
+                {% with player=team.players|get_player_by_zone:zone %}
+                {% if player %}
+                <div class="player-info {% if player.is_captain %}captain-highlight{% endif %}">
+                    <span class="badge {% if player.is_captain %}bg-warning{% else %}bg-secondary{% endif %}">
+                        {{ player.number }}
+                    </span>
+                    {{ player.name }}
+                    <small class="d-block">{{ player.get_position_display }}</small>
+                    {% if player.is_captain %}<small class="d-block text-warning fw-bold">(K)</small>{% endif %}
+                </div>
+                {% endif %}
+                {% endwith %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .zone-box {
+        width: 120px;
+        padding: 10px;
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        text-align: center;
+        min-height: 100px;
+        margin: 5px;
+        background-color: #f8f9fa;
+    }
+
+    .player-info {
+        margin: 3px 0;
+        padding: 5px;
+        border-radius: 4px;
+        background-color: white;
+        transition: all 0.2s;
+    }
+
+    .captain-highlight {
+        background-color: #fff3cd;
+        border-left: 3px solid #ffc107;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+        .captain-highlight .badge {
+            font-weight: bold;
+        }
+
+    .zone-label {
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #495057;
+    }
+</style>

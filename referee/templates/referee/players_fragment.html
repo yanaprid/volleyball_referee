@@ -1,0 +1,12 @@
+<div class="col-md-6">
+    <div class="court-container">
+        <h3 class="text-center">{{ match.team_a }}</h3>
+        {% include 'referee/_court.html' with team=match.team_a players=team_a_players %}
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="court-container">
+        <h3 class="text-center">{{ match.team_b }}</h3>
+        {% include 'referee/_court.html' with team=match.team_b players=team_b_players %}
+    </div>
+</div>

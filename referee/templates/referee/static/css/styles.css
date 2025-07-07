@@ -1,0 +1,128 @@
+/* static/css/styles.css */
+.volleyball-court {
+    border: 3px solid #333;
+    padding: 15px;
+    background-color: #e9f5e9;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.court-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.court-zone {
+    width: 90px;
+    height: 90px;
+    border: 2px solid #666;
+    margin: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.front-row {
+    margin-bottom: 25px;
+}
+
+.player-badge {
+    text-align: center;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.player-number {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.player-name {
+    font-size: 0.8em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-position {
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+.empty-zone {
+    color: #999;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.captain {
+    background-color: #fff3cd;
+}
+
+.libero {
+    background-color: #d1ecf1;
+}
+
+.serving-zone {
+    border: 3px solid #28a745;
+}
+
+.score-display {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.team-a-score {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.team-b-score {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.timeouts-display {
+    background-color: #f8f9fa;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.match-header {
+    background-color: #343a40;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.team-a {
+    color: #dc3545;
+}
+
+.team-b {
+    color: #007bff;
+}
+
+.team-a-court {
+    border-color: #dc3545;
+}
+
+.team-b-court {
+    border-color: #007bff;
+}
+
+.action-log {
+    max-height: 200px;
+    overflow-y: auto;
+}

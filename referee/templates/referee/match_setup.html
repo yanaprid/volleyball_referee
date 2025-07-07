@@ -1,0 +1,33 @@
+﻿{% extends "referee/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="text-center">Создание матча</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_team_a_name" class="form-label">Команда A</label>
+                            {{ form.team_a_name }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_team_b_name" class="form-label">Команда B</label>
+                            {{ form.team_b_name }}
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="bi bi-plus-circle"></i> Создать матч
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

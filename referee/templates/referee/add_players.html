@@ -1,0 +1,128 @@
+{% extends "referee/base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">ДОБАВЛЕНИЕ ИГРОКОВ</h2>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="POST" class="row g-3">
+                {% csrf_token %}
+
+                <div class="col-md-6">
+                    {{ form.name.label_tag }}
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                    <div class="invalid-feedback">
+                        {{ form.name.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="col-md-6">
+                    {{ form.number.label_tag }}
+                    {{ form.number }}
+                    {% if form.number.errors %}
+                    <div class="invalid-feedback">
+                        {{ form.number.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="col-md-6">
+                    {{ form.position.label_tag }}
+                    {{ form.position }}
+                </div>
+
+                <div class="col-md-6">
+                    {{ form.zone.label_tag }}
+                    {{ form.zone }}
+                </div>
+
+                <div class="col-12">
+                    <div class="form-check">
+                        {{ form.is_captain }}
+                        <label class="form-check-label" for="{{ form.is_captain.id_for_label }}">
+                            Капитан
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label for="id_team_choice" class="form-label">Team</label>
+                    <select name="team_choice" class="form-select" id="id_team_choice" required>
+                        <option value="">Выбрать команду</option>
+                        <option value="A"> {{ match.team_a.name }}</option>
+                        <option value="B">{{ match.team_b.name }}</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Добавить игрока</button>
+                </div>
+                {% for player in team_a_players %}
+                <div class="player-row">
+
+                </div>
+                {% endfor %}
+            </form>
+        </div>
+    </div>
+
+    <div id="players-container" class="row mt-4">
+        <div class="col-md-6">
+            <div class="court-container">
+                <h3 class="text-center">{{ match.team_a }}</h3>
+                {% include 'referee/_court.html' with team=match.team_a players=team_a_players %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="court-container">
+                <h3 class="text-center">{{ match.team_b }}</h3>
+                {% include 'referee/_court.html' with team=match.team_b players=team_b_players %}
+            </div>
+        </div>
+    </div>
+
+    {% if not match.is_completed and match.status == 'not_started' %}
+    <div class="text-center mt-4">
+        <form method="post" action="{% url 'start_match' match_id=match.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary btn-lg">
+                Начать матч
+            </button>
+        </form>
+    </div>
+    {% endif %}
+
+    
+</div>
+
+<style>
+    .court-container {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .player-badge {
+        background-color: #e9ecef;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        padding: 8px;
+        margin: 5px;
+        text-align: center;
+    }
+
+    .is-invalid {
+        border-color: #dc3545;
+    }
+
+    .invalid-feedback {
+        color: #dc3545;
+        font-size: 0.875em;
+    }
+</style>
+
+{% endblock %}
